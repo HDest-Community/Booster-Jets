@@ -52,7 +52,7 @@ class HDBoosterJets : HDPickup
 		{
 			if (level.time % 2 == 0)
 			{
-				plr.A_StartSound("jetpack/fwoosh", CHAN_AUTO, CHANF_DEFAULT, 0.2, pitch: 1.6 + 0.2 * (level.time & (1 | 2))); // [Ace] I have no idea how these bitwise ORs work or why they're there.
+				plr.A_StartSound("jetpack/fwoosh", CHAN_AUTO, CHANF_DEFAULT, 0.12, pitch: 1.6 + 0.2 * (level.time & (1 | 2))); // [Ace] I have no idea how these bitwise ORs work or why they're there.
 			}
 			if (DrainTicks++ >= 105)
 			{
