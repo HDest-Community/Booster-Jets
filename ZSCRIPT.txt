@@ -79,8 +79,8 @@ class HDBoosterJets : HDPickup
 				{
 					ReactivationTics = 30;
 					Bang();
-					plr.vel.xy *= IsPressingSprint ? 3.0 : 1.5;
-					plr.vel.z += IsPressingSprint ? 5 : 15;
+					plr.vel.z += IsPressingSprint ? 8 : 15;
+					plr.vel.xy *= IsPressingSprint ? 2.25 : 1.5;
 					plr.DamageMobj(plr, plr, 10, 'Bashing');
 					InternalBattery -= Cost;
 				}
