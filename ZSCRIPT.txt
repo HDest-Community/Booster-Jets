@@ -90,7 +90,7 @@ class HDBoosterJets : HDPickup
 				}
 			}
 		}
-		else if (InternalBattery < 100 && RechargeTicks++ >= 10)
+		else if (IsCharging && InternalBattery < 100 && RechargeTicks++ >= 10)
 		{
 			RechargeTicks = 0;
 
@@ -113,7 +113,7 @@ class HDBoosterJets : HDPickup
 	override int GetSbarNum(int flags)
 	{
 		let HDHud = HDStatusBar(StatusBar);
-		HDHud.SavedColour = Active ? Font.CR_GREEN : Font.CR_RED;
+		HDHud.SavedColour = Active ? Font.CR_GREEN : (IsCharging ? Font.CR_SAPPHIRE : Font.CR_RED);
 		return InternalBattery;
 	}
 
@@ -139,6 +139,7 @@ class HDBoosterJets : HDPickup
 	}
 
 	private bool Active;
+	private bool IsCharging;
 	private int InternalBattery;
 	private int ReactivationTics;
 	private int DrainTicks;
@@ -167,8 +168,17 @@ class HDBoosterJets : HDPickup
 		Use:
 			TNT1 A 0
 			{
-				A_StartSound("jetpack/wear", CHAN_WEAPON);
-				invoker.Active = !invoker.Active;
+				if (!invoker.Active && player.cmd.buttons & BT_USE)
+				{
+					invoker.IsCharging = !invoker.IsCharging;
+					A_StartSound("weapons/plasswitch", CHAN_WEAPON);
+				}
+				else
+				{
+					invoker.IsCharging = false;
+					invoker.Active = !invoker.Active;
+					A_StartSound("jetpack/wear", CHAN_WEAPON);
+				}
 			}
 			Fail;
 	}

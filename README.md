@@ -1,11 +1,13 @@
 ### Usage
 ---
-- Use item to turn it on, and jump. Hold sprint to trade vertical velocity boost for horizontal.
-- Cost scales with how encumbered you are.
-- Make sure you have batteries in your inventory to charge the jets from when inactive.
-- You can and probably will incap yourself with it so watch out.
+- Use Item: Turn on.
+- Use + Use Item: If turned off, enable charging.
+- Jump: If turned on, gain boost to current momentum.
+- Sprint + Jump: Same as above but trade vertical velocity boost for horizontal.
 
 ### Notes
 ---
+- Cost scales with how encumbered you are.
+- You can and probably will incap yourself with it so watch out.
 - Booster jets are found naturally in the world.
 - Loadout code is `bsj`.
