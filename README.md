@@ -1,6 +1,7 @@
 ### Usage
 ---
 - Use item to turn it on, and jump. Hold sprint to trade vertical velocity boost for horizontal.
+- Cost scales with how encumbered you are.
 - Make sure you have batteries in your inventory to charge the jets from when inactive.
 - You can and probably will incap yourself with it so watch out.
 

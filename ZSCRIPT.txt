@@ -70,7 +70,7 @@ class HDBoosterJets : HDPickup
 
 			if (JustPressedJump && ReactivationTics <= 0)
 			{
-				int Cost = int(5 * plr.CheckEncumbrance());
+				int Cost = int(min(5, 5 * plr.CheckEncumbrance()));
 				if (InternalBattery >= Cost)
 				{
 					ReactivationTics = 30;
@@ -78,7 +78,6 @@ class HDBoosterJets : HDPickup
 					plr.vel.xy *= IsPressingSprint ? 3.0 : 1.5;
 					plr.vel.z += IsPressingSprint ? 5 : 15;
 					plr.DamageMobj(plr, plr, 10, 'Bashing');
-					Console.Printf("%f", plr.CheckEncumbrance());
 					InternalBattery -= Cost;
 				}
 				else
@@ -136,7 +135,6 @@ class HDBoosterJets : HDPickup
 	}
 
 	private bool Active;
-	private bool IsFlying;
 	private int InternalBattery;
 	private int ReactivationTics;
 	private int DrainTicks;
