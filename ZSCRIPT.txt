@@ -14,10 +14,9 @@ class BoosterJetsHandler : EventHandler
 			case 'RedSphere':
 			case 'PortableHealingItemBigger':
 			case 'SSGReplaces':
-				if (random() <= 8)
+				if (random[jetsrand]() <= 8)
 				{
 					e.Replacement = "HDBoosterJets";
-					e.IsFinal = true;
 				}
 				break;
 		}
