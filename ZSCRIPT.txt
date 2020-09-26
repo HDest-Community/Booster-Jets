@@ -1,6 +1,6 @@
 version "4.0"
 
-class BoosterJetsHandler : EventHandler
+class BoosterJetsHandler : StaticEventHandler
 {
 	override void CheckReplacement(ReplaceEvent e)
 	{
