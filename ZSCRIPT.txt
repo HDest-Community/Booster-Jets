@@ -73,7 +73,7 @@ class HDBoosterJets : HDPickup
 
 			if (JustPressedJump && ReactivationTics <= 0)
 			{
-				int Cost = int(min(5, 5 * plr.CheckEncumbrance()));
+				int Cost = int(max(5, 5 * plr.CheckEncumbrance()));
 				if (InternalBattery >= Cost)
 				{
 					ReactivationTics = 30;
