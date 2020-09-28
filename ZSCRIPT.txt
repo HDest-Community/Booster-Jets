@@ -92,10 +92,9 @@ class HDBoosterJets : HDPickup
 		else if (IsCharging && InternalBattery < 100 && RechargeTicks++ >= 10)
 		{
 			RechargeTicks = 0;
-
-			int Index, Charge;
+			
 			let Battery = HDBattery(owner.FindInventory("HDBattery"));
-			[Index, Charge] = GetLowestBattery(Battery, 1);
+			int Index = GetLowestBattery(Battery, 1);
 			if (Index > -1)
 			{
 				if (!random(0, 5))
