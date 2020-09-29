@@ -157,7 +157,7 @@ class HDBoosterJets : HDPickup
 		+INVENTORY.INVBAR
 		HDPickup.Bulk 140;
 		HDPickup.RefID "bsj";
-		Inventory.MaxAmount 3;
+		Inventory.MaxAmount 1;
 		Inventory.Icon "BSJTA0";
 		Inventory.PickupMessage "Picked up the booster jets.";
 		Scale 0.7;
