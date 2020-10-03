@@ -27,9 +27,15 @@ class HDBoosterJets : HDPickup
 {
 	override void BeginPlay()
 	{
-		InternalBattery = 100;
+		InternalBattery = MaxBattery;
 
 		Super.BeginPlay();
+	}
+
+	private void StopCharging()
+	{
+		IsCharging = false;
+		owner.A_StartSound("weapons/plasswitch", CHAN_WEAPON);
 	}
 
 	private void Bang()
@@ -89,7 +95,7 @@ class HDBoosterJets : HDPickup
 				}
 			}
 		}
-		else if (IsCharging && InternalBattery < 100 && RechargeTicks++ >= 10)
+		else if (IsCharging && InternalBattery < MaxBattery && RechargeTicks++ >= 10)
 		{
 			RechargeTicks = 0;
 			
@@ -103,6 +109,14 @@ class HDBoosterJets : HDPickup
 				}
 				InternalBattery++;
 			}
+			else
+			{
+				StopCharging();
+			}
+		}
+		else if (IsCharging && InternalBattery == MaxBattery)
+		{
+			StopCharging();
 		}
 
 		Super.DoEffect();
@@ -147,6 +161,8 @@ class HDBoosterJets : HDPickup
 	private int ReactivationTics;
 	private int DrainTicks;
 	private int RechargeTicks;
+
+	const MaxBattery = 100;
 
 	Default
 	{
