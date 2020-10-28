@@ -14,7 +14,7 @@ class BoosterJetsHandler : StaticEventHandler
 			case 'RedSphere':
 			case 'PortableHealingItemBigger':
 			case 'SSGReplaces':
-				if (random[jetsrand]() <= 8)
+				if (random[jetsrand]() <= 12)
 				{
 					e.Replacement = "HDBoosterJets";
 				}
