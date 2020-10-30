@@ -21,6 +21,15 @@ class BoosterJetsHandler : StaticEventHandler
 				break;
 		}
 	}
+
+	override void WorldThingSpawned(WorldEvent e)
+	{
+		let Bat = HDBattery(e.Thing);
+		if (Bat)
+		{
+			Bat.ItemsThatUseThis.Push("HDBoosterJets");
+		}
+	}
 }
 
 class HDBoosterJets : HDPickup
