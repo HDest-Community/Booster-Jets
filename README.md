@@ -9,5 +9,5 @@
 ---
 - Cost scales with how encumbered you are.
 - You can and probably will incap yourself with it so watch out.
-- Booster jets are found naturally in the world.
+- Booster jets are found naturally in the world. They are also sold by the [Merchant](https://gitlab.com/accensi/hd-addons/merchant) if you have that loaded.
 - Loadout code is `bsj`.
