@@ -91,7 +91,7 @@ class HDBoosterJets : HDPickup
 				int Cost = int(max(5, 3 * plr.CheckEncumbrance()));
 				if (InternalBattery >= Cost)
 				{
-					ReactivationTics = 30;
+					ReactivationTics = 20;
 					Bang();
 					plr.vel.z += IsPressingSprint ? 8 : 15;
 					plr.vel.xy *= IsPressingSprint ? 2.25 : 1.5;
