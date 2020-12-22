@@ -44,6 +44,7 @@ class HDBoosterJets : HDPickup
 	private void StopCharging()
 	{
 		IsCharging = false;
+		DrainTicksBattery = 0;
 		owner.A_StartSound("weapons/plasswitch", CHAN_WEAPON);
 	}
 
@@ -112,9 +113,15 @@ class HDBoosterJets : HDPickup
 			int Index = GetLowestBattery(Battery, 1);
 			if (Index > -1)
 			{
-				if (!random(0, 5))
+				if (DrainTicksBattery == 0)
 				{
 					Battery.Mags[Index]--;
+				}
+
+				if (++DrainTicksBattery > 5)
+				{
+					Battery.Mags[Index]--;
+					DrainTicksBattery -= 5;
 				}
 				InternalBattery++;
 			}
@@ -169,6 +176,7 @@ class HDBoosterJets : HDPickup
 	private int InternalBattery;
 	private int ReactivationTics;
 	private int DrainTicks;
+	private int DrainTicksBattery;
 	private int RechargeTicks;
 
 	const MaxBattery = 100;
@@ -200,8 +208,15 @@ class HDBoosterJets : HDPickup
 			{
 				if (!invoker.Active && player.cmd.buttons & BT_USE)
 				{
-					invoker.IsCharging = !invoker.IsCharging;
-					A_StartSound("weapons/plasswitch", CHAN_WEAPON);
+					if (!invoker.IsCharging)
+					{
+						invoker.IsCharging = true;
+						A_StartSound("weapons/plasswitch", CHAN_WEAPON);
+					}
+					else
+					{
+						invoker.StopCharging();
+					}
 				}
 				else
 				{
