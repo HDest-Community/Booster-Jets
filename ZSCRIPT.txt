@@ -87,7 +87,7 @@ class HDBoosterJets : HDPickup
 			bool IsPressingJump = buttons & BT_JUMP;
 			bool IsPressingSprint = buttons & BT_SPEED;
 
-			if (JustPressedJump && ReactivationTics <= 0)
+			if (plr && JustPressedJump && ReactivationTics <= 0)
 			{
 				int Cost = int(max(5, 3 * plr.CheckEncumbrance()));
 				if (InternalBattery >= Cost)
