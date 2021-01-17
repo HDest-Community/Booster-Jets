@@ -110,7 +110,7 @@ class HDBoosterJets : HDPickup
 			RechargeTicks = 0;
 			
 			let Battery = HDBattery(owner.FindInventory("HDBattery"));
-			int Index = GetLowestBattery(Battery, 1);
+			int Index = AceCore.GetLowestBattery(Battery, 1);
 			if (Index > -1)
 			{
 				if (DrainTicksBattery == 0)
@@ -143,32 +143,6 @@ class HDBoosterJets : HDPickup
 		let HDHud = HDStatusBar(StatusBar);
 		HDHud.SavedColour = Active ? Font.CR_GREEN : (IsCharging ? Font.CR_SAPPHIRE : Font.CR_RED);
 		return InternalBattery;
-	}
-
-	private clearscope int, int GetLowestBattery(HDBattery stack, int minCharge)
-	{
-		if (stack)
-		{
-			int LowestIndex = stack.Mags.Size() - 1;
-			int LowestCharge = stack.MaxPerUnit;
-			for (int i = LowestIndex; i >= 0; --i)
-			{
-				if (stack.Mags[i] >= minCharge && stack.Mags[i] <= LowestCharge)
-				{
-					LowestIndex = i;
-					LowestCharge = stack.Mags[i];
-				}
-			}
-
-			// [Ace] Do a final check to see if the battery fulfills the conditions.
-			// If there is only one battery and the charge is < minCharge, the loop above won't do much.
-			if (stack.Mags[LowestIndex] >= minCharge)
-			{
-				return LowestIndex, stack.Mags[LowestIndex];
-			}
-		}
-
-		return -1, 0;
 	}
 
 	private bool Active;

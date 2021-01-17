@@ -1,3 +1,6 @@
+### Important
+- This mod requires [AceCoreLib](https://gitlab.com/accensi/hd-addons/acecorelib).
+
 ### Usage
 ---
 - Use Item: Turn on.
