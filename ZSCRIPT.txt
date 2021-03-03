@@ -41,14 +41,14 @@ class HDBoosterJets : HDPickup
 		Super.BeginPlay();
 	}
 
-	private void StopCharging()
+	protected void StopCharging()
 	{
 		IsCharging = false;
 		DrainTicksBattery = 0;
 		owner.A_StartSound("weapons/plasswitch", CHAN_WEAPON);
 	}
 
-	private void Bang()
+	protected void Bang()
 	{
 		owner.A_StartSound("jetpack/bang", 10, pitch: 1 + frandom(-0.2, 0.2));
 		
@@ -145,13 +145,13 @@ class HDBoosterJets : HDPickup
 		return InternalBattery;
 	}
 
-	private bool Active;
-	private bool IsCharging;
-	private int InternalBattery;
-	private int ReactivationTics;
-	private int DrainTicks;
-	private int DrainTicksBattery;
-	private int RechargeTicks;
+	protected bool Active;
+	protected bool IsCharging;
+	protected int InternalBattery;
+	protected int ReactivationTics;
+	protected int DrainTicks;
+	protected int DrainTicksBattery;
+	protected int RechargeTicks;
 
 	const MaxBattery = 100;
 
