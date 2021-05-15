@@ -163,7 +163,7 @@ class HDBoosterJets : HDPickup
 		-HDPICKUP.FITSINBACKPACK
 		+HDPICKUP.NEVERSHOWINPICKUPMANAGER
 		+INVENTORY.INVBAR
-		HDPickup.Bulk 140;
+		HDPickup.Bulk 100;
 		HDPickup.RefID "bsj";
 		Inventory.MaxAmount 1;
 		Inventory.Icon "BSJTA0";
