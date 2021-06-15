@@ -96,7 +96,7 @@ class HDBoosterJets : HDPickup
 					Bang();
 					plr.vel.z += IsPressingSprint ? 8 : 15;
 					plr.vel.xy *= IsPressingSprint ? 2.25 : 1.5;
-					plr.DamageMobj(plr, plr, 10, 'Bashing');
+					plr.DamageMobj(plr, plr, 10, 'Internal');
 					InternalBattery -= Cost;
 				}
 				else
