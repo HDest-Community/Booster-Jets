@@ -96,7 +96,7 @@ class HDBoosterJets : HDPickup
 					plr.vel.z += isPressingSprint ? 8 : 15;
 					if (isPressingSprint)
 					{
-						plr.vel.xy *= isPressingSprint ? 2.25;
+						plr.vel.xy *= 2.25;
 					}
 					plr.lastvel = plr.vel;
 					plr.DamageMobj(plr, plr, 10, 'Internal');
