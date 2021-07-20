@@ -37,7 +37,6 @@ class HDBoosterJets : HDPickup
 	override void BeginPlay()
 	{
 		InternalBattery = MaxBattery;
-
 		Super.BeginPlay();
 	}
 
@@ -52,10 +51,10 @@ class HDBoosterJets : HDPickup
 	{
 		owner.A_StartSound("jetpack/bang", 10, pitch: 1 + frandom(-0.2, 0.2));
 		
-		let Exp = Spawn("HDExplosion", (owner.pos.xy, owner.pos.z - 20), ALLOW_REPLACE);
-		Exp.vel.z -= 20;
-		Exp.vel.xy += AngleToVector(owner.angle + angle, 6);
-		Exp.deathsound = "jetpack/bang";
+		let exp = Spawn("HDExplosion", (owner.pos.xy, owner.pos.z - 20), ALLOW_REPLACE);
+		exp.vel.z -= 20;
+		exp.vel.xy += AngleToVector(owner.angle + angle, 6);
+		exp.deathsound = "jetpack/bang";
 	}
 
 	override void DoEffect()
@@ -83,19 +82,22 @@ class HDBoosterJets : HDPickup
 
 			int buttons = plr.player.cmd.buttons;
 			int oldbuttons = plr.player.oldbuttons;
-			bool JustPressedJump = buttons & BT_JUMP && !(oldbuttons & BT_JUMP);
-			bool IsPressingJump = buttons & BT_JUMP;
-			bool IsPressingSprint = buttons & BT_SPEED;
+			bool justPressedJump = buttons & BT_JUMP && !(oldbuttons & BT_JUMP);
+			bool isPressingJump = buttons & BT_JUMP;
+			bool isPressingSprint = buttons & BT_SPEED;
 
-			if (plr && JustPressedJump && ReactivationTics <= 0)
+			if (plr && justPressedJump && ReactivationTics <= 0)
 			{
 				int Cost = int(max(5, 3 * plr.CheckEncumbrance()));
 				if (InternalBattery >= Cost)
 				{
 					ReactivationTics = 20;
 					Bang();
-					plr.vel.z += IsPressingSprint ? 8 : 15;
-					plr.vel.xy *= IsPressingSprint ? 2.25 : 1.5;
+					plr.vel.z += isPressingSprint ? 8 : 15;
+					if (isPressingSprint)
+					{
+						plr.vel.xy *= isPressingSprint ? 2.25;
+					}
 					plr.lastvel = plr.vel;
 					plr.DamageMobj(plr, plr, 10, 'Internal');
 					InternalBattery -= Cost;
@@ -110,18 +112,18 @@ class HDBoosterJets : HDPickup
 		{
 			RechargeTicks = 0;
 			
-			let Battery = HDBattery(owner.FindInventory("HDBattery"));
-			int Index = AceCore.GetLowestBattery(Battery, 1);
+			let bat = HDBattery(owner.FindInventory("HDBattery"));
+			int Index = AceCore.GetLowestBattery(bat, 1);
 			if (Index > -1)
 			{
 				if (DrainTicksBattery == 0)
 				{
-					Battery.Mags[Index]--;
+					bat.Mags[Index]--;
 				}
 
 				if (++DrainTicksBattery > 5)
 				{
-					Battery.Mags[Index]--;
+					bat.Mags[Index]--;
 					DrainTicksBattery -= 5;
 				}
 				InternalBattery++;
