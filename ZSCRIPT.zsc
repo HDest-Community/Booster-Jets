@@ -93,10 +93,10 @@ class HDBoosterJets : HDPickup
 				{
 					ReactivationTics = 20;
 					Bang();
-					plr.vel.z += isPressingSprint ? 8 : 15;
+					plr.vel.z += isPressingSprint ? 4 : 8;
 					if (isPressingSprint)
 					{
-						plr.vel.xy *= 2.25;
+						plr.vel.xy *= 2;
 					}
 					plr.lastvel = plr.vel;
 					plr.DamageMobj(plr, plr, 10, 'Internal');
