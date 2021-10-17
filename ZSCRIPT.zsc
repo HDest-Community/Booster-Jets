@@ -91,12 +91,14 @@ class HDBoosterJets : HDPickup
 				int Cost = int(max(5, 3 * plr.overloaded));
 				if (InternalBattery >= Cost)
 				{
-					ReactivationTics = 20;
+					double grav = GetGravity() * 2;
+					ReactivationTics = int(20 / GetGravity());
 					Bang();
-					plr.vel.z += isPressingSprint ? 8 : 15;
+
+					plr.vel.z += (isPressingSprint ? 8 : 15) * clamp(grav * 1.2, 0.01, 1.0);
 					if (isPressingSprint)
 					{
-						plr.vel.xy *= 2.25;
+						plr.vel.xy *= 2.25 * clamp(grav * 1.2, 0.01, 1.0);
 					}
 					plr.lastvel = plr.vel;
 					plr.DamageMobj(plr, plr, 10, 'Internal');
