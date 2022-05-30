@@ -68,7 +68,7 @@ class HDBoosterJets : HDPickup
 			{
 				plr.A_StartSound("jetpack/fwoosh", CHAN_AUTO, CHANF_DEFAULT, 0.12, pitch: 1.6 + 0.2 * (level.time & (1 | 2))); // [Ace] I have no idea how these bitwise ORs work or why they're there.
 			}
-			if (DrainTicks++ >= 105)
+			if (DrainTicks++ >= 35 * 8)
 			{
 				DrainTicks = 0;
 				InternalBattery--;
@@ -88,7 +88,7 @@ class HDBoosterJets : HDPickup
 
 			if (plr && justPressedJump && ReactivationTics <= 0)
 			{
-				int Cost = int(max(5, 3 * plr.overloaded));
+				int Cost = int(max(2, 2 * plr.overloaded));
 				if (InternalBattery >= Cost)
 				{
 					ReactivationTics = 20;
@@ -99,8 +99,8 @@ class HDBoosterJets : HDPickup
 					{
 						plr.vel.xy *= 2.0;
 					}
-					plr.lastvel = plr.vel;
-					plr.DamageMobj(plr, plr, 10, 'Internal');
+					plr.lastvel = plr.vel; // [Ace] So you don't incap from the thrust.
+					plr.DamageMobj(plr, plr, 4, 'Internal');
 					InternalBattery -= Cost;
 				}
 				else
@@ -114,20 +114,14 @@ class HDBoosterJets : HDPickup
 			RechargeTicks = 0;
 			
 			let bat = HDBattery(owner.FindInventory("HDBattery"));
-			int Index = AceCore.GetLowestBattery(bat, 1);
-			if (Index > -1)
+			int index = AceCore.GetLowestBattery(bat, 1);
+			if (index > -1)
 			{
-				if (DrainTicksBattery == 0)
+				if (++DrainTicksBattery % 20 == 0)
 				{
-					bat.Mags[Index]--;
+					bat.Mags[index]--;
+					InternalBattery = min(MaxBattery, InternalBattery + ChargePerCharge);
 				}
-
-				if (++DrainTicksBattery > 5)
-				{
-					bat.Mags[Index]--;
-					DrainTicksBattery -= 5;
-				}
-				InternalBattery++;
 			}
 			else
 			{
@@ -158,6 +152,7 @@ class HDBoosterJets : HDPickup
 	protected int RechargeTicks;
 
 	const MaxBattery = 100;
+	const ChargePerCharge = MaxBattery / 20;
 
 	Default
 	{
