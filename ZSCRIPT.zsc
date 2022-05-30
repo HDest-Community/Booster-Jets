@@ -43,7 +43,7 @@ class HDBoosterJets : HDPickup
 	protected void StopCharging()
 	{
 		IsCharging = false;
-		DrainTicksBattery = 0;
+		RechargeTicks = 0;
 		owner.A_StartSound("weapons/plasswitch", CHAN_WEAPON);
 	}
 
@@ -109,7 +109,7 @@ class HDBoosterJets : HDPickup
 				}
 			}
 		}
-		else if (IsCharging && InternalBattery < MaxBattery && RechargeTicks++ >= 10)
+		else if (IsCharging && InternalBattery < MaxBattery && RechargeTicks++ >= 35)
 		{
 			RechargeTicks = 0;
 			
@@ -117,11 +117,8 @@ class HDBoosterJets : HDPickup
 			int index = AceCore.GetLowestBattery(bat, 1);
 			if (index > -1)
 			{
-				if (++DrainTicksBattery % 20 == 0)
-				{
-					bat.Mags[index]--;
-					InternalBattery = min(MaxBattery, InternalBattery + ChargePerCharge);
-				}
+				bat.Mags[index]--;
+				InternalBattery = min(MaxBattery, InternalBattery + ChargePerCharge);
 			}
 			else
 			{
@@ -148,7 +145,6 @@ class HDBoosterJets : HDPickup
 	protected int InternalBattery;
 	protected int ReactivationTics;
 	protected int DrainTicks;
-	protected int DrainTicksBattery;
 	protected int RechargeTicks;
 
 	const MaxBattery = 100;
